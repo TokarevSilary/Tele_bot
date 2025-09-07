@@ -1,8 +1,11 @@
-import requests
 import json
+
+import requests
+
 from token_keys import token
 
-url = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup'
+url = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup"
+
 
 def translate_to_en(word):
     word = word.lower()
@@ -17,8 +20,6 @@ def translate_to_en(word):
         return data["def"][0]["tr"][0]["text"]
     except (KeyError, IndexError):
         return None
-    # print(json.dumps(data, indent=4, ensure_ascii=False))
-    # print(data["def"][0]["tr"][0]["text"])
 
 
 def translate_to_ru(word):
@@ -30,6 +31,4 @@ def translate_to_ru(word):
     }
     response = requests.get(url, params=params)
     data = response.json()
-    # print(json.dumps(data, indent=4, ensure_ascii=False))
-    # print(data["def"][0]["tr"][0]["text"])
     return data["def"][0]["tr"][0]["text"]
